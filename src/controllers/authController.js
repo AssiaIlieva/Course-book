@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     res.redirect("/");
 } catch (error) {
     const message = getErrorMessage(error);
-    res.render("auth/register", {error: message });
+    res.render("auth/register", {...userData, error: message });
   }
 });
 
@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
     res.cookie("auth", token);
     res.redirect("/");
   } catch (error) {
-    res.render('auth/login', {error: getErrorMessage(error)})
+    res.render('auth/login', {email, error: getErrorMessage(error)})
   }
 });
 
