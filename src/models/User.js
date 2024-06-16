@@ -1,4 +1,4 @@
-const {Schema, model, MongooseError} = require('mongoose');
+const {Schema, model, MongooseError, default: mongoose} = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -14,7 +14,15 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
-    }
+    },
+    createdCourses: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Course',
+    }],
+    signedUpCourses: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Course',
+    }]
 });
 
 userSchema.pre('save', async function(){
