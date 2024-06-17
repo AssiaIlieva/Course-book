@@ -21,7 +21,7 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    prise: {
+    price: {
         type: Number,
         required: true,
     },
@@ -29,10 +29,10 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }],
-    owner: [{
+    owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
-    }],
+    },
 });
 
 const Course = mongoose.model('Course', courseSchema);
