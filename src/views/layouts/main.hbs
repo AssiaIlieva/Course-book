@@ -27,11 +27,11 @@
         <ul>
           <!-- Guest users and Logged users -->
           <li><a href="/">Home</a></li>
-          <li><a href="#">All Courses</a></li>
+          <li><a href="/courses">All Courses</a></li>
           {{#if isAuthenticated}}
           <!--For loggin users-->
           <li><a href="#">Profile</a></li>
-          <li><a href="#">Create Course Offers</a></li>
+          <li><a href="/courses/create">Create Course Offers</a></li>
           <li><a href="/auth/logout">Logout</a></li>
           {{else}}
           <!--For guest users-->
