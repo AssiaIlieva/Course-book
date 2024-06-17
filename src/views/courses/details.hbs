@@ -21,12 +21,17 @@
   </div>
   <div class="btn-container">
     <!-- Only for registered user and creator of the course-->
-    <a href="#">Edit</a>
-    <a href="#">Delete</a>
-    <!-- logged in user who has not yet sign up for the course-->
-    <a href="/courses/{{_id}}/sign-up">Sign up</a>
-    <!-- logged in user who has already sign up for the course-->
-    <p class="sign-up">You've already signed up for this course!</p>
-
+    {{#if isAuthenticated}}
+        {{#if isOwner}}
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+        {{else if isSigned}}
+        <!-- logged in user who has already sign up for the course-->
+        <p class="sign-up">You've already signed up for this course!</p>
+        {{else}}
+        <!-- logged in user who has not yet sign up for the course-->
+        <a href="/courses/{{_id}}/sign-up">Sign up</a>
+        {{/if}}
+    {{/if}}
   </div>
 </div>
