@@ -13,6 +13,8 @@ exports.create = async (userId, courseData) => {
 
 exports.delete = (courseId) => Course.findByIdAndDelete(courseId);
 
+exports.edit = (courseId, courseData) => Course.findByIdAndUpdate(courseId, courseData, {runValidators: true});
+
 exports.getAll = () => Course.find();
 
 exports.getOne = (courseId) => Course.findById(courseId);

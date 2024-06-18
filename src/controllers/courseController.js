@@ -38,18 +38,35 @@ router.get('/:courseId/sign-up', async (req, res) => {
     res.redirect(`/courses/${req.params.courseId}/details`)
 });
 
+router.get('/:courseId/edit', isCourseOwner, async (req, res) => {
+    res.render('courses/edit', {...req.course})
+});
+
+router.post('/:courseId/edit', isCourseOwner, async(req, res) => {
+    const courseData = req.body;
+    try {
+        await courseService.edit(req.params.courseId, courseData);
+        res.redirect(`/courses/${req.params.courseId}/details`)
+    } catch (error) {
+        res.render('courses/edit', {...courseData, error: getErrorMessage(error)})
+    }
+})
+
 router.get('/:courseId/delete', isCourseOwner, async(req, res) => {
     await courseService.delete(req.params.courseId);
     res.redirect('/courses')
 });
 
 async function isCourseOwner(req, res, next) {
-    const course = await courseService.getOne(req.params.courseId);
+    const course = await courseService.getOne(req.params.courseId).lean();
     if(course.owner != req.user?._id) {
         return res.redirect(`/courses/${req.params.courseId}/details`);
     }
+    req.course = course
     next();
-}
+};
+
+
 
 
 module.exports = router;
