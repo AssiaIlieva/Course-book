@@ -1,14 +1,12 @@
 const router = require('express').Router();
-const {isAuth} = require('../middlewares/authMiddlware');
+const courseService = require('../services/courseService');
 
-router.get('/', (req, res) => {
-    res.render('home')
+router.get('/', async (req, res) => {
+    const latestCourses = await courseService.getLatest().lean();
+    console.log(latestCourses);
+    res.render('home', {latestCourses})
 });
 
-// TODO: Delete this
-router.get('/authorize-test', isAuth, (req, res) => {
-    console.log(req.user);
-    res.send('Your are authorized');
-})
+
 
 module.exports = router

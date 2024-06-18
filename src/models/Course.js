@@ -31,6 +31,7 @@ const courseSchema = new mongoose.Schema({
         min: 0,
         required: true,
     },
+    createdAt: Date,
     signUpList: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'
@@ -40,6 +41,12 @@ const courseSchema = new mongoose.Schema({
         ref: 'User'
     },
 });
+
+courseSchema.pre('save', function(){
+    if(!this.createdAt){
+        this.createdAt = Date.now();
+    }
+})
 
 const Course = mongoose.model('Course', courseSchema);
 

@@ -19,6 +19,8 @@ exports.getAll = () => Course.find();
 
 exports.getOne = (courseId) => Course.findById(courseId);
 
+exports.getLatest = () => Course.find().sort({createdAt: -1}).limit(3)
+
 exports.getOneWithOwner = (courseId) => this.getOne(courseId).populate('owner').populate('signUpList');
 
 exports.signUp = async (courseId, userId) => {
