@@ -11,6 +11,8 @@ exports.create = async (userId, courseData) => {
     return createdCourse;
 };
 
+exports.delete = (courseId) => Course.findByIdAndDelete(courseId);
+
 exports.getAll = () => Course.find();
 
 exports.getOne = (courseId) => Course.findById(courseId);
@@ -28,4 +30,6 @@ exports.signUp = async (courseId, userId) => {
 
     // await course.save();
     // await user.save();
-}
+};
+
+

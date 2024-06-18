@@ -23,8 +23,8 @@
     <!-- Only for registered user and creator of the course-->
     {{#if isAuthenticated}}
         {{#if isOwner}}
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
+        <a href="/courses/{{_id}}/edit">Edit</a>
+        <a href="/courses/{{_id}}/delete">Delete</a>
         {{else if isSigned}}
         <!-- logged in user who has already sign up for the course-->
         <p class="sign-up">You've already signed up for this course!</p>
